@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-let users = [];
+
 app.get("/", (req, res) => {
   res.send("Home");
 });
@@ -20,18 +20,5 @@ app.get("/", (req, res) => {
 app.use("/teachers", teacherRouter);
 
 app.use("/registers", registerRouter);
-
-app.post("/cadastrar", (req, res) => {
-  console.log("dados recebidos..");
-  users.push({
-    nome: req.body.nome,
-    tel: req.body.telefone,
-  });
-  res.json({ message: "Ok", dados: users });
-});
-
-app.get("/users", (req, res) => {
-  res.json(users);
-});
 
 app.listen(port, () => console.log(`servidor rodando em localhost:${port}`));
