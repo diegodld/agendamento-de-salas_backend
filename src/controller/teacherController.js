@@ -1,7 +1,6 @@
 import connection from "../database/db.js";
 
-const sqlSelect =  (res) => {
- 
+const sqlSelect = (res) => {
   let sql = "SELECT * FROM professores ORDER BY nome";
   connection.query(sql, (err, result) => {
     if (err) {
@@ -13,7 +12,7 @@ const sqlSelect =  (res) => {
   });
 };
 
-const sqlInsert =  (req, res) => {
+const sqlInsert = (req, res) => {
   let sql = "INSERT INTO professores (nome, telefone) VALUES (?,?)";
   connection.query(sql, [req.body.nome, req.body.telefone], (err, result) => {
     if (err) throw err;
@@ -21,7 +20,7 @@ const sqlInsert =  (req, res) => {
   res.sendStatus(200);
 };
 
-const sqlDelete =  (req, res) => {
+const sqlDelete = (req, res) => {
   let sql = `DELETE FROM professores WHERE id_professor = ${req.params.id_professor}`;
   connection.query(sql, (err, result) => {
     if (err) throw err;
@@ -30,16 +29,16 @@ const sqlDelete =  (req, res) => {
   res.sendStatus(200);
 };
 
- function getTeachers(req, res) {
+function getTeachers(req, res) {
   return sqlSelect(res);
 }
 
- function registerTeacher(req, res) {
+function registerTeacher(req, res) {
   return sqlInsert(req, res);
 }
 
- function deleteTeacher(req, res) {
+function deleteTeacher(req, res) {
   return sqlDelete(req, res);
 }
 
-export default { getTeachers, registerTeacher, deleteTeacher };
+export { getTeachers, registerTeacher, deleteTeacher };
