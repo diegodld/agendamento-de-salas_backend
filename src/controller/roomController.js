@@ -6,7 +6,18 @@ const sqlSelect = (res) => {
     if (err) {
       throw err;
     } else {
-      return res.json(result);
+      res.json(result);
+    }
+  });
+};
+
+const sqlSelectOne = (req, res) => {
+  let sql = `SELECT * FROM salas WHERE id_sala =${req.params.id_sala} `;
+  connection.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.json(result);
     }
   });
 };
@@ -23,7 +34,6 @@ const sqlDelete = (req, res) => {
   let sql = `DELETE FROM salas WHERE id_sala = ${req.params.id_sala}`;
   connection.query(sql, (err, result) => {
     if (err) throw err;
-    console.log(result);
   });
   res.sendStatus(200);
 };
@@ -43,6 +53,10 @@ const getRooms = (req, res) => {
   sqlSelect(res);
 };
 
+const findOneRoom = (req, res) => {
+  sqlSelectOne(req, res);
+};
+
 const createRoom = (req, res) => {
   sqlInsert(req, res);
 };
@@ -55,4 +69,4 @@ const deleteRoom = (req, res) => {
   sqlDelete(req, res);
 };
 
-export { getRooms, createRoom, deleteRoom, updateRoom };
+export { getRooms, createRoom, deleteRoom, updateRoom, findOneRoom };

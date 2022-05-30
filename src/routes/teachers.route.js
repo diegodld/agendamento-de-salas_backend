@@ -4,11 +4,14 @@ import {
   registerTeacher,
   deleteTeacher,
   updateTeacher,
+  findOneTeacher,
 } from "../controller/teacherController.js";
 
 const router = express.Router();
 
 router.get("/", getTeachers);
+
+router.get("/:id_professor", findOneTeacher);
 
 router.post("/", registerTeacher);
 

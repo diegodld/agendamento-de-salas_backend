@@ -7,7 +7,18 @@ const sqlSelect = (res) => {
       throw err;
     } else {
       let teachers = result;
-      return res.json(teachers);
+      res.json(teachers);
+    }
+  });
+};
+
+const sqlSelectOne = (req, res) => {
+  let sql = `SELECT * FROM professores WHERE id_professor =${req.params.id_professor} `;
+  connection.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.json(result);
     }
   });
 };
@@ -41,19 +52,29 @@ const sqlUpdate = (req, res) => {
 };
 
 function getTeachers(req, res) {
-  return sqlSelect(res);
+  sqlSelect(res);
 }
 
 function registerTeacher(req, res) {
-  return sqlInsert(req, res);
+  sqlInsert(req, res);
 }
 
 function updateTeacher(req, res) {
-  return sqlUpdate(req, res);
+  sqlUpdate(req, res);
 }
 
 function deleteTeacher(req, res) {
-  return sqlDelete(req, res);
+  sqlDelete(req, res);
 }
 
-export { getTeachers, registerTeacher, updateTeacher, deleteTeacher };
+function findOneTeacher(req, res) {
+  sqlSelectOne(req, res);
+}
+
+export {
+  getTeachers,
+  registerTeacher,
+  updateTeacher,
+  deleteTeacher,
+  findOneTeacher,
+};
