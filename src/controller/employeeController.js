@@ -7,7 +7,7 @@ const sqlSelect = (res) => {
       throw err;
     } else {
       let employees = result;
-      return res.json(employees);
+      res.json(employees);
     }
   });
 };
@@ -19,7 +19,7 @@ const sqlSelectOne = (req, res) => {
       throw err;
     } else {
       let employees = result;
-      return res.json(employees);
+      res.json(employees);
     }
   });
 };
@@ -70,6 +70,7 @@ const deleteEmployee = (req, res) => {
 const findOneEmployee = (req, res) => {
   sqlSelectOne(req, res);
 };
+
 export {
   createEmployee,
   getEmployees,
