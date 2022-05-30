@@ -29,6 +29,17 @@ const sqlDelete = (req, res) => {
   res.sendStatus(200);
 };
 
+const sqlUpdate = (req, res) => {
+  let sql = `UPDATE professores 
+  SET nome = '${req.body.nome}', telefone='${req.body.telefone}' 
+  WHERE id_professor = ${req.body.id_professor}`;
+
+  connection.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send({ message: "Atualizado com sucesso!", result });
+  });
+};
+
 function getTeachers(req, res) {
   return sqlSelect(res);
 }
@@ -37,8 +48,12 @@ function registerTeacher(req, res) {
   return sqlInsert(req, res);
 }
 
+function updateTeacher(req, res) {
+  return sqlUpdate(req, res);
+}
+
 function deleteTeacher(req, res) {
   return sqlDelete(req, res);
 }
 
-export { getTeachers, registerTeacher, deleteTeacher };
+export { getTeachers, registerTeacher, updateTeacher, deleteTeacher };

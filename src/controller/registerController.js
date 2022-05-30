@@ -13,4 +13,8 @@ function join(req, res) {
   });
 }
 
+const sqlInsert = (req,res)=>{
+  let sql = ``
+}
+
 export default join;
